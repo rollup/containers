@@ -7,7 +7,10 @@ jobs:
 
     branches:
       only:
-        - master
+        - base
+        - v6
+        - v8
+        - v10
     steps:
       - checkout
       - setup_remote_docker
