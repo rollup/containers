@@ -24,7 +24,7 @@ jobs:
       - deploy:
           name: Push Docker image
           command: |
-              login="docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS"
+              login="docker login -u $DOCKER_USER -p $DOCKER_PASS"
               tag="docker tag circleci-node-${CIRCLE_BRANCH} webpackcontrib/circleci-node-${CIRCLE_BRANCH}"
               push="docker push webpackcontrib/circleci-node-${CIRCLE_BRANCH}"
               ${login}
