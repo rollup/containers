@@ -22,14 +22,10 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            build="docker build -f Dockerfile -t circleci-node-${CIRCLE_BRANCH} ."
-            ${build}
+            docker build -f Dockerfile -t circleci-node-${CIRCLE_BRANCH} .
       - deploy:
           name: Push Docker image
           command: |
-              login="docker login -u $DOCKER_USER -p $DOCKER_PASS"
-              tag="docker tag circleci-node-$CIRCLE_BRANCH rollupcabal/circleci-node-$CIRCLE_BRANCH"
-              push="docker push rollupcabal/circleci-node-$CIRCLE_BRANCH"
-              ${login}
-              ${tag}
-              ${push}
+            docker login -u ${DOCKER_USER} -p "${DOCKER_PASS}"
+            docker tag circleci-node-${CIRCLE_BRANCH} rollupcabal/circleci-node-${CIRCLE_BRANCH}
+            docker push rollupcabal/circleci-node-${CIRCLE_BRANCH}
