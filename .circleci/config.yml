@@ -28,10 +28,8 @@ jobs:
           name: Push Docker image
           command: |
               login="docker login -u $DOCKER_USER -p $DOCKER_PASS"
-              tag="docker tag circleci-node-$CIRCLE_BRANCH webpackcontrib/circleci-node-$CIRCLE_BRANCH"
-              push="docker push webpackcontrib/circleci-node-$CIRCLE_BRANCH"
-              echo "$tag"
-              echo "$push"
+              tag="docker tag circleci-node-$CIRCLE_BRANCH rollupcabal/circleci-node-$CIRCLE_BRANCH"
+              push="docker push rollupcabal/circleci-node-$CIRCLE_BRANCH"
               ${login}
               ${tag}
               ${push}
