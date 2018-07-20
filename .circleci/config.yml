@@ -7,7 +7,10 @@ jobs:
 
     branches:
       only:
-        - master
+        - base
+        - v6
+        - v8
+        - v10
     steps:
       - checkout
       - setup_remote_docker
@@ -19,14 +22,10 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            build="docker build -f Dockerfile -t circleci-node-${CIRCLE_BRANCH} ."
-            ${build}
+            docker build -f Dockerfile -t circleci-node-${CIRCLE_BRANCH} .
       - deploy:
           name: Push Docker image
           command: |
-              login="docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS"
-              tag="docker tag circleci-node-${CIRCLE_BRANCH} webpackcontrib/circleci-node-${CIRCLE_BRANCH}"
-              push="docker push webpackcontrib/circleci-node-${CIRCLE_BRANCH}"
-              ${login}
-              ${tag}
-              ${push}
+            docker login -u ${DOCKER_USER} -p "${DOCKER_PASS}"
+            docker tag circleci-node-${CIRCLE_BRANCH} rollupcabal/circleci-node-${CIRCLE_BRANCH}
+            docker push rollupcabal/circleci-node-${CIRCLE_BRANCH}
