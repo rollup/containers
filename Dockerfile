@@ -25,11 +25,6 @@ RUN ln -sf /usr/share/zoneinfo/Etc/UTC /etc/localtime
 RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 
-# Install jq
-RUN JQ_URL=$(curl --location --fail --retry 3 https://api.github.com/repos/stedolan/jq/releases/latest  | grep browser_download_url | grep '/jq-linux64"' | grep -o -e 'https.*jq-linux64') \
-  && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \
-  && chmod +x /usr/bin/jq
-
 # Install Docker
 RUN set -ex \
   && export DOCKER_VERSION=$(curl --silent --fail --retry 3 https://download.docker.com/linux/static/stable/x86_64/ | grep -o -e 'docker-[.0-9]*-ce\.tgz' | sort -r | head -n 1) \
@@ -83,7 +78,7 @@ USER circleci
 # NodeJS Configuration
 # ...
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.7.0
+ENV NODE_VERSION 12.5.0
 
 # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
@@ -96,4 +91,5 @@ RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-CMD [ "node" ]
+# CMD [ "node" ]
+CMD tail -f /dev/null
