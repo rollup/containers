@@ -12,6 +12,7 @@ jobs:
         - v8
         - v10
         - v12
+        - v14
     steps:
       - checkout
       - setup_remote_docker
