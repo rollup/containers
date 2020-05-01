@@ -83,7 +83,7 @@ USER circleci
 # NodeJS Configuration
 # ...
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 10.7.0
+ENV NODE_VERSION 14.1.0
 
 # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
