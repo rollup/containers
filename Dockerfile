@@ -26,7 +26,7 @@ RUN locale-gen C.UTF-8 || true
 ENV LANG=C.UTF-8
 
 # Install jq
-RUN JQ_URL=$(curl --location --fail --retry 3 https://api.github.com/repos/stedolan/jq/releases/latest  | grep browser_download_url | grep '/jq-linux64"' | grep -o -e 'https.*jq-linux64') \
+RUN JQ_URL=$(curl --location --fail --retry 3 https://api.github.com/repos/stedolan/jq/releases/latest  | grep browser_download_url | grep '/jq-linux64' | grep -o -e 'https.*jq-linux64') \
   && curl --silent --show-error --location --fail --retry 3 --output /usr/bin/jq $JQ_URL \
   && chmod +x /usr/bin/jq
 
@@ -83,7 +83,7 @@ USER circleci
 # NodeJS Configuration
 # ...
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 14.1.0
+ENV NODE_VERSION 14.15.4
 
 # Install nvm with node and npm
 RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash \
